@@ -1,3 +1,4 @@
+<div class="container">
 <%= form_with(model: registration_form, local: true) do |form| %>
   <% if registration_form.errors.any? %>
     <div id="error_explanation">
@@ -17,8 +18,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :partner_id %>
-    <%= form.text_field :partner_id %>
+    <%= form.collection_select(:partner_id, Partner.all, :id, :name, class: "browser-default") %>
+    <%= form.label :partner_id %>	
   </div>
 
   <div class="field">
@@ -35,3 +36,4 @@
     <%= form.submit %>
   </div>
 <% end %>
+</div>

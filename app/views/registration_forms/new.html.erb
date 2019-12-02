@@ -1,5 +1,12 @@
-<h1>New Registration Form</h1>
+<div class="container"><h3 style="text-align: center">New Registration Form</h3><div>
 
 <%= render 'form', registration_form: @registration_form %>
 
 <%= link_to 'Back', registration_forms_path %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, options);
+  });
+</script>

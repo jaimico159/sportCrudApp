@@ -12,6 +12,28 @@
   </head>
 
   <body>
+   <nav> 
+  <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+</nav>
+
+
+
+  <ul id="slide-out" class="sidenav">
+    <li><%= link_to "Partners", partners_path %></li>
+    <li><%= link_to "Sport Types", sport_types_path %></li>
+    <li><%= link_to "Registration Forms", registration_forms_path %></li>
+  </ul>
+
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var options = {draggable: true};
+    var instances = M.Sidenav.init(elems, options);
+  });
+
+  </script>
+
     <%= yield %>
   </body>
 </html>
