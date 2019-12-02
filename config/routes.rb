@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :registration_forms
   resources :sport_types
   resources :partners
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

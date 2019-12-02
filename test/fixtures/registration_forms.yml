@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  form_number: 1
+  partner: one
+  sport_type: one
+  record_status: 1
+
+two:
+  form_number: 1
+  partner: two
+  sport_type: two
+  record_status: 1
