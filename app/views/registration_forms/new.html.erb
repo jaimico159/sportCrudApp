@@ -4,9 +4,12 @@
 
 <%= link_to 'Back', registration_forms_path %>
 
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('select');
-    var instances = M.FormSelect.init(elems, options);
+    var elem1 = document.getElementById('registration_form_partner_id');
+    var elem2 = document.getElementById('registration_form_sport_type_id');
+    M.FormSelect.init(elem1);
+    M.FormSelect.init(elem2);
   });
 </script>

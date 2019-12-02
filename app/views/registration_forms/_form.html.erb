@@ -18,13 +18,13 @@
   </div>
 
   <div class="field">
-    <%= form.collection_select(:partner_id, Partner.all, :id, :name, class: "browser-default") %>
-    <%= form.label :partner_id %>	
+    <%= form.label :partner_id %>
+    <%= form.collection_select(:partner_id, Partner.all, :id, :name) %>
   </div>
 
   <div class="field">
     <%= form.label :sport_type_id %>
-    <%= form.text_field :sport_type_id %>
+    <%= form.collection_select(:sport_type_id, SportType.all, :id, :name) %>
   </div>
 
   <div class="field">

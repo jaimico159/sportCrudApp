@@ -17,8 +17,8 @@
     <% @registration_forms.each do |registration_form| %>
       <tr>
         <td><%= registration_form.form_number %></td>
-        <td><%= registration_form.partner %></td>
-        <td><%= registration_form.sport_type %></td>
+        <td><%= registration_form.partner.name %></td>
+        <td><%= registration_form.sport_type.name %></td>
         <td><%= registration_form.record_status %></td>
         <td><%= link_to 'Show', registration_form %></td>
         <td><%= link_to 'Edit', edit_registration_form_path(registration_form) %></td>
