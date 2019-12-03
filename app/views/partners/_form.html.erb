@@ -1,3 +1,4 @@
+<div class="container">
 <%= form_with(model: partner, local: true) do |form| %>
   <% if partner.errors.any? %>
     <div id="error_explanation">
@@ -11,22 +12,45 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="row">
     <%= form.label :code %>
     <%= form.text_field :code %>
   </div>
 
-  <div class="field">
+  <div class="row">
     <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
 
-  <div class="field">
+  <div class="row">
     <%= form.label :record_status %>
-    <%= form.number_field :record_status %>
+    <%= form.select :record_status, Partner.record_statuses.keys.to_a %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="row">
+    <%= form.button class: "btn waves-effect waves-light", style: "width: 100%" do %>
+      <%= @partner.new_record? ? 'Create Partner' : 'Update Partner' %>
+      <i class="material-icons right">send</i>
+    <% end %>
   </div>
+<% end %>
+</div>
+
+<% content_for :custom_scripts do %>
+<script>
+  document.addEventListener('turbolinks:render', () => {
+    let elem1 = document.getElementById('partner_record_status');
+    M.FormSelect.init(elem1);
+  });
+
+  document.addEventListener('turbolinks:before-cache', () => {
+    let elem1 = document.getElementById('partner_record_status');
+    if(elem1){
+      let inst = M.FormSelect.getInstance(elem1);
+      if(inst){
+        inst.destroy();
+      }
+    }
+  });
+</script>
 <% end %>

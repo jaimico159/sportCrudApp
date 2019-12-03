@@ -7,9 +7,50 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="turbolinks-cache-control" content="no-preview">
+    <script>
+      document.addEventListener('turbolinks:load', ()=>{
+        let elem = document.getElementById('slide-out');
+        let instance = M.Sidenav.init(elem, {draggable: true});
+      });
 
+      document.addEventListener('turbolinks:before-cache', ()=>{
+        let elem = document.getElementById('slide-out');
+        let instance = M.Sidenav.init(elem, {draggable: true});
+        if(instance) instance.destroy();
+      });
+    </script>
+    <%= yield :custom_scripts %>
+    <style>
+      .scrollable {
+        max-height: 400px;
+        overflow: scroll;
+      }
+    </style>
+  </head>
   <body>
+  <nav> 
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <%= yield :title %>
+  </nav>
+
+  <ul id="slide-out" class="sidenav">
+    <li><%= link_to "Partners", partners_path %></li>
+    <li><%= link_to "Sport Types", sport_types_path %></li>
+    <li><%= link_to "Registration Forms", registration_forms_path %></li>
+  </ul>
+
+  <%= javascript_tag do %>
+    <% if notice.present? %>
+      M.toast({html: '<%= notice %>', classes: 'lime darken-3'});
+    <% end %>
+    <% if alert.present? %>
+      M.toast({html: '<%= alert %>', classes: 'red darken-3'});
+    <% end %>
+  <% end %>
+
     <%= yield %>
   </body>
 </html>

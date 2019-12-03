@@ -1,6 +1,11 @@
-<h1>Editing Partner</h1>
+<% content_for :title do %>
+  <h6 class="brand-logo center valign-wrapper" style="font-size: 21px">Editing Partner</h6>
+<% end %>
+
+<div class="row"></div>
 
 <%= render 'form', partner: @partner %>
 
-<%= link_to 'Show', @partner %> |
-<%= link_to 'Back', partners_path %>
+<div class="container">
+  <%= link_to "BACK", partners_path, class: "btn waves-effect waves-light white-text", style: "width: 100%"%>
+</div>
