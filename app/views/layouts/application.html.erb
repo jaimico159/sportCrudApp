@@ -23,6 +23,12 @@
       });
     </script>
     <%= yield :custom_scripts %>
+    <style>
+      .scrollable {
+        max-height: 400px;
+        overflow: scroll;
+      }
+    </style>
   </head>
   <body>
   <nav> 
@@ -35,6 +41,16 @@
     <li><%= link_to "Sport Types", sport_types_path %></li>
     <li><%= link_to "Registration Forms", registration_forms_path %></li>
   </ul>
+
+  <%= javascript_tag do %>
+    <% if notice.present? %>
+      M.toast({html: '<%= notice %>', classes: 'lime darken-3'});
+    <% end %>
+    <% if alert.present? %>
+      M.toast({html: '<%= alert %>', classes: 'red darken-3'});
+    <% end %>
+  <% end %>
+
     <%= yield %>
   </body>
 </html>

@@ -1,15 +1,12 @@
+# frozen_string_literal: true
+
 class PartnersController < ApplicationController
-  before_action :set_partner, only: [:show, :edit, :update, :destroy]
+  before_action :set_partner, only: %i[show edit update destroy]
 
   # GET /partners
   # GET /partners.json
   def index
     @partners = Partner.all
-  end
-
-  # GET /partners/1
-  # GET /partners/1.json
-  def show
   end
 
   # GET /partners/new
@@ -18,8 +15,7 @@ class PartnersController < ApplicationController
   end
 
   # GET /partners/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /partners
   # POST /partners.json
@@ -28,8 +24,8 @@ class PartnersController < ApplicationController
 
     respond_to do |format|
       if @partner.save
-        format.html { redirect_to @partner, notice: 'Partner was successfully created.' }
-        format.json { render :show, status: :created, location: @partner }
+        format.html { redirect_to partners_path, notice: 'Partner was successfully created.' }
+        format.json { render :index, status: :created, location: partners_path }
       else
         format.html { render :new }
         format.json { render json: @partner.errors, status: :unprocessable_entity }
@@ -42,8 +38,8 @@ class PartnersController < ApplicationController
   def update
     respond_to do |format|
       if @partner.update(partner_params)
-        format.html { redirect_to @partner, notice: 'Partner was successfully updated.' }
-        format.json { render :show, status: :ok, location: @partner }
+        format.html { redirect_to partners_path, notice: 'Partner was successfully updated.' }
+        format.json { render :index, status: :ok, location: partners_path }
       else
         format.html { render :edit }
         format.json { render json: @partner.errors, status: :unprocessable_entity }
@@ -62,13 +58,14 @@ class PartnersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_partner
-      @partner = Partner.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def partner_params
-      params.require(:partner).permit(:code, :name, :record_status)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_partner
+    @partner = Partner.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def partner_params
+    params.require(:partner).permit(:code, :name, :record_status)
+  end
 end
