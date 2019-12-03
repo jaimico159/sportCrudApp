@@ -2,6 +2,10 @@
   <h6 class="brand-logo center valign-wrapper" style="font-size: 21px">New Sport Type</h6>
 <% end %>
 
+<div class="row"></div>
+
 <%= render 'form', sport_type: @sport_type %>
 
-<%= link_to 'Back', sport_types_path %>
+<div class="container">
+  <%= link_to "BACK", sport_types_path, class: "btn waves-effect waves-light white-text", style: "width: 100%"%>
+</div>

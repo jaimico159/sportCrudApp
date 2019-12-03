@@ -50,10 +50,23 @@ class PartnersController < ApplicationController
   # DELETE /partners/1
   # DELETE /partners/1.json
   def destroy
-    @partner.destroy
-    respond_to do |format|
-      format.html { redirect_to partners_url, notice: 'Partner was successfully destroyed.' }
-      format.json { head :no_content }
+    if @partner.registration_forms.count > 0
+      respond_to do |format|
+        format.html { redirect_to partners_path, alert: 'This Partner cannot be deleted as registration forms are attached to it' }
+      end
+      return
+    end
+
+    if @partner.destroy
+      respond_to do |format|
+        format.html { redirect_to partners_url, notice: 'Partner was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to partners_url, alert: 'Can\'t delete Partner.' }
+        format.json { head :no_content }
+      end
     end
   end
 
