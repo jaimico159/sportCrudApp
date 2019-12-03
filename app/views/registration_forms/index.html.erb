@@ -2,7 +2,14 @@
 
 <h4 style="text-align: center">Registration Forms</h4>
 
-<div class="container">
+<style>
+  .scrollable {
+    max-height: 400px;
+    overflow: scroll;
+  }
+</style>
+
+<div class="container scrollable">
 <table class="striped">
   <thead>
     <tr>
@@ -17,7 +24,26 @@
   <tbody>
     <% @registration_forms.each do |registration_form| %>
       <tr>
-        <td><%= link_to registration_form.form_number, registration_form %></td>
+        <td>
+          <%= link_to registration_form.form_number, 
+                      "#modal#{registration_form.form_number}", 
+                      class: "modal-trigger" 
+          %>
+        </td>
+        <div id="<%= "modal#{registration_form.form_number}"%>" class="modal">
+          <div class="modal-content">
+            <h4 class="center-align">Registration Form</h4>
+             <ul class="collection">
+              <li class="collection-item"><strong>Number: </strong><%= registration_form.form_number %></li>
+              <li class="collection-item"><strong>Partner: </strong><%= registration_form.partner.name %></li>
+              <li class="collection-item"><strong>Sport Type: </strong><%= registration_form.sport_type.name %></li>
+              <li class="collection-item"><strong>Status: </strong><%= registration_form.record_status %></li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">CLOSE</a>
+          </div>
+        </div>
         <td><%= registration_form.partner.name %></td>
         <td><%= registration_form.sport_type.name %></td>
         <td><%= registration_form.record_status %></td>
@@ -47,6 +73,17 @@
 
 <% content_for :custom_scripts do %>
 <script>
+  document.addEventListener('turbolinks:load', () => {
+    let elems = document.querySelectorAll('.modal');
+    let instances = M.Modal.init(elems);
+  });
 
+  document.addEventListener('turbolinks:before-cache', () => {
+    let elems = document.querySelectorAll('.modal');
+    let instances = M.Modal.init(elems);
+    instances.forEach(element => {
+      if(element) element.destroy();
+    });
+  });
 </script>
 <% end %>

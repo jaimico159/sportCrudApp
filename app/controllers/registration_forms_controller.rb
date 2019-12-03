@@ -1,15 +1,12 @@
+# frozen_string_literal: true
+
 class RegistrationFormsController < ApplicationController
-  before_action :set_registration_form, only: [:show, :edit, :update, :destroy]
+  before_action :set_registration_form, only: %i[edit update destroy]
 
   # GET /registration_forms
   # GET /registration_forms.json
   def index
     @registration_forms = RegistrationForm.all
-  end
-
-  # GET /registration_forms/1
-  # GET /registration_forms/1.json
-  def show
   end
 
   # GET /registration_forms/new
@@ -18,8 +15,7 @@ class RegistrationFormsController < ApplicationController
   end
 
   # GET /registration_forms/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /registration_forms
   # POST /registration_forms.json
@@ -28,8 +24,8 @@ class RegistrationFormsController < ApplicationController
 
     respond_to do |format|
       if @registration_form.save
-        format.html { redirect_to @registration_form, notice: 'Registration form was successfully created.' }
-        format.json { render :show, status: :created, location: @registration_form }
+        format.html { redirect_to registration_forms_path, notice: 'Registration form was successfully created.' }
+        format.json { render :index, status: :created, location: @registration_form }
       else
         format.html { render :new }
         format.json { render json: @registration_form.errors, status: :unprocessable_entity }
@@ -42,8 +38,8 @@ class RegistrationFormsController < ApplicationController
   def update
     respond_to do |format|
       if @registration_form.update(registration_form_params)
-        format.html { redirect_to @registration_form, notice: 'Registration form was successfully updated.' }
-        format.json { render :show, status: :ok, location: @registration_form }
+        format.html { redirect_to registration_forms_path, notice: 'Registration form was successfully updated.' }
+        format.json { render :index, status: :ok, location: @registration_form }
       else
         format.html { render :edit }
         format.json { render json: @registration_form.errors, status: :unprocessable_entity }
@@ -62,13 +58,14 @@ class RegistrationFormsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_registration_form
-      @registration_form = RegistrationForm.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def registration_form_params
-      params.require(:registration_form).permit(:form_number, :partner_id, :sport_type_id, :record_status)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_registration_form
+    @registration_form = RegistrationForm.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def registration_form_params
+    params.require(:registration_form).permit(:form_number, :partner_id, :sport_type_id, :record_status)
+  end
 end

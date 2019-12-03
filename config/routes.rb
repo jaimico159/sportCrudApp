@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :registration_forms
+  resources :registration_forms, except: :show
   resources :sport_types
   resources :partners
   root 'home#index'
