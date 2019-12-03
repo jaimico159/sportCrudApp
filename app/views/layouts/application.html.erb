@@ -8,12 +8,26 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="turbolinks-cache-control" content="no-preview">
+    <script>
+      document.addEventListener('turbolinks:load', ()=>{
+        let elem = document.getElementById('slide-out');
+        let instance = M.Sidenav.init(elem, {draggable: true});
+      });
 
+      document.addEventListener('turbolinks:before-cache', ()=>{
+        let elem = document.getElementById('slide-out');
+        let instance = M.Sidenav.init(elem, {draggable: true});
+        if(instance) instance.destroy();
+      });
+    </script>
+    <%= yield :custom_scripts %>
+  </head>
   <body>
-   <nav> 
+  <nav> 
     <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <%= yield :title %>
   </nav>
 
   <ul id="slide-out" class="sidenav">
@@ -21,16 +35,6 @@
     <li><%= link_to "Sport Types", sport_types_path %></li>
     <li><%= link_to "Registration Forms", registration_forms_path %></li>
   </ul>
-
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.sidenav');
-    var options = {draggable: true};
-    var instances = M.Sidenav.init(elems, options);
-  });
-
-  </script>
-
     <%= yield %>
   </body>
 </html>

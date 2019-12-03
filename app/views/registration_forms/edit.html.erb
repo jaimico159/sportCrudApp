@@ -1,6 +1,16 @@
-<h1>Editing Registration Form</h1>
+<% content_for :title do %>
+  <h6 class="brand-logo center valign-wrapper" style="font-size: 19px">Editing Registration Form</h6>
+<% end %>
+
+<div class="row"></div>
 
 <%= render 'form', registration_form: @registration_form %>
 
-<%= link_to 'Show', @registration_form %> |
-<%= link_to 'Back', registration_forms_path %>
+<div class="container">
+  <div class="row">
+  <%= link_to "SHOW", @registration_form, class: "btn waves-effect waves-light white-text", style: "width: 100%"%>
+  </div>
+  <div class="row">
+  <%= link_to "BACK", registration_forms_path, class: "btn waves-effect waves-light white-text", style: "width: 100%"%>
+  </div>
+</div>

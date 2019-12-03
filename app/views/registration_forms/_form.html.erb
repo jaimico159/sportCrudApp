@@ -40,3 +40,42 @@
   </div>
 <% end %>
 </div>
+
+<% content_for :custom_scripts do %>
+<script>
+  document.addEventListener('turbolinks:render', () => {
+    let elem1 = document.getElementById('registration_form_partner_id');
+    let elem2 = document.getElementById('registration_form_sport_type_id');
+    let elem3 = document.getElementById('registration_form_record_status');
+    M.FormSelect.init(elem1);
+    M.FormSelect.init(elem2);
+    M.FormSelect.init(elem3);
+  });
+
+  document.addEventListener('turbolinks:before-cache', () => {
+    let elem1 = document.getElementById('registration_form_partner_id');
+    let elem2 = document.getElementById('registration_form_sport_type_id');
+    let elem3 = document.getElementById('registration_form_record_status');
+    if(elem1){
+      let inst = M.FormSelect.getInstance(elem1);
+      if(inst){
+        inst.destroy();
+      }
+    }
+    
+    if(elem2){
+      let inst = M.FormSelect.getInstance(elem2);
+      if(inst){
+        inst.destroy();
+      }
+    }
+
+    if(elem2){
+      let inst = M.FormSelect.getInstance(elem3);
+      if(inst){
+        inst.destroy();
+      }
+    }
+  });
+</script>
+<% end %>

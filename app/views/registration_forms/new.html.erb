@@ -1,20 +1,11 @@
-<div class="container"><h4 style="text-align: center">New Registration Form</h4><div>
+<% content_for :title do %>
+  <h6 class="brand-logo center valign-wrapper" style="font-size: 19px">New Registration Form</h6>
+<% end %>
+
+<div class="row"></div>
 
 <%= render 'form', registration_form: @registration_form %>
 
-<div class="container row">
-  <%= button_to registration_forms_path, class: "btn waves-effect waves-light", style: "width: 100%", method: :get do %>
-    BACK
-  <% end %>
+<div class="container">
+  <%= link_to "BACK", registration_forms_path, class: "btn waves-effect waves-light white-text", style: "width: 100%"%>
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var elem1 = document.getElementById('registration_form_partner_id');
-    var elem2 = document.getElementById('registration_form_sport_type_id');
-    var elem3 = document.getElementById('registration_form_record_status');
-    M.FormSelect.init(elem1);
-    M.FormSelect.init(elem2);
-    M.FormSelect.init(elem3);
-  });
-</script>
