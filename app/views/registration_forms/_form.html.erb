@@ -12,28 +12,31 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="row">
     <%= form.label :form_number %>
     <%= form.number_field :form_number %>
   </div>
 
-  <div class="field">
+  <div class="row">
     <%= form.label :partner_id %>
     <%= form.collection_select(:partner_id, Partner.all, :id, :name) %>
   </div>
 
-  <div class="field">
+  <div class="row">
     <%= form.label :sport_type_id %>
     <%= form.collection_select(:sport_type_id, SportType.all, :id, :name) %>
   </div>
 
-  <div class="field">
+  <div class="row">
     <%= form.label :record_status %>
-    <%= form.number_field :record_status %>
+    <%= form.select :record_status, RegistrationForm.record_statuses.keys.to_a %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="row">
+    <%= form.button class: "btn waves-effect waves-light", style: "width: 100%" do %>
+      <%= @registration_form.new_record? ? 'Create Registration Form' : 'Update Registration Form' %>
+      <i class="material-icons right">send</i>
+    <% end %>
   </div>
 <% end %>
 </div>
