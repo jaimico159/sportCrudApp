@@ -50,7 +50,7 @@ class RegistrationFormsController < ApplicationController
   # DELETE /registration_forms/1
   # DELETE /registration_forms/1.json
   def destroy
-    @registration_form.destroy
+    @registration_form.update(record_status: 'deleted')
     respond_to do |format|
       format.html { redirect_to registration_forms_url, notice: 'Registration form was successfully destroyed.' }
       format.json { head :no_content }

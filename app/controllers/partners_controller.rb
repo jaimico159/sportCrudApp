@@ -66,7 +66,7 @@ class PartnersController < ApplicationController
       return
     end
 
-    if @partner.destroy
+    if @partner.update(record_status: 'deleted')
       respond_to do |format|
         format.html { redirect_to partners_url, notice: 'Partner was successfully destroyed.' }
         format.json { head :no_content }

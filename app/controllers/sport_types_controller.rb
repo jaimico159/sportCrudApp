@@ -67,7 +67,7 @@ class SportTypesController < ApplicationController
       return
     end
 
-    if @sport_type.destroy
+    if @sport_type.update(record_status: 'deleted')
       respond_to do |format|
         format.html { redirect_to sport_types_url, notice: 'Sport type was successfully destroyed.' }
         format.json { head :no_content }
