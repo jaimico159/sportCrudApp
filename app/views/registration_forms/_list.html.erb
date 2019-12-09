@@ -1,0 +1,61 @@
+<div class="container scrollable">
+<table class="striped">
+  <thead>
+    <tr>
+      <th>Form number</th>
+      <th>Partner</th>
+      <th>Sport type</th>
+      <th>Record status</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% registration_forms.each do |registration_form| %>
+      <tr>
+        <td>
+          <%= link_to registration_form.form_number, 
+                      "#modal#{registration_form.form_number}", 
+                      class: "modal-trigger" 
+          %>
+        </td>
+        <div id="<%= "modal#{registration_form.form_number}"%>" class="modal">
+          <div class="modal-content">
+            <h4 class="center-align">Registration Form</h4>
+             <ul class="collection">
+              <li class="collection-item"><strong>Number: </strong><%= registration_form.form_number %></li>
+              <li class="collection-item"><strong>Partner: </strong><%= registration_form.partner.name %></li>
+              <li class="collection-item"><strong>Sport Type: </strong><%= registration_form.sport_type.name %></li>
+              <li class="collection-item"><strong>Status: </strong><%= registration_form.record_status %></li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">CLOSE</a>
+          </div>
+        </div>
+        <td><%= registration_form.partner.name %></td>
+        <td><%= registration_form.sport_type.name %></td>
+        <td><%= registration_form.record_status %></td>
+        <!--<td><%= link_to 'Show', registration_form %></td>-->
+        <td>
+          <%= link_to edit_registration_form_path(registration_form) do %>
+            <i class="material-icons">edit</i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to registration_form, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <i class="material-icons">delete</i>
+          <% end %>  
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<br>
+
+<div class="fixed-action-btn">
+  <%= link_to new_registration_form_path, class: "btn-floating btn-large waves-effect waves-light blue" do %>
+    <i class="material-icons">add</i>
+  <% end %>
+</div>

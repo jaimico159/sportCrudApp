@@ -7,6 +7,17 @@ class PartnersController < ApplicationController
   # GET /partners.json
   def index
     @partners = Partner.all
+
+    (@filterrific = initialize_filterrific(
+      Partner,
+      params[:filterrific]
+    )) || return
+    @partners = @filterrific.find.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /partners/new
