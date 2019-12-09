@@ -6,8 +6,6 @@ class PartnersController < ApplicationController
   # GET /partners
   # GET /partners.json
   def index
-    @partners = Partner.all
-
     (@filterrific = initialize_filterrific(
       Partner,
       params[:filterrific]

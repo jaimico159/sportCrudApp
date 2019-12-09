@@ -7,6 +7,16 @@ class SportTypesController < ApplicationController
   # GET /sport_types.json
   def index
     @sport_types = SportType.all
+    (@filterrific = initialize_filterrific(
+      SportType,
+      params[:filterrific]
+    )) || return
+    @sport_types = @filterrific.find.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /sport_types/new

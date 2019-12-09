@@ -3,77 +3,35 @@
 <% end %>
 
 <div class="row"></div>
-<div class="container scrollable">
-<table class="striped">
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Name</th>
-      <th>Record status</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @sport_types.each do |sport_type| %>
-      <tr>
-      <td>
-          <%= link_to sport_type.code, 
-                      "#modal#{sport_type.code}", 
-                      class: "modal-trigger" 
-          %>
-        </td>
-        <div id="<%= "modal#{sport_type.code}"%>" class="modal">
-          <div class="modal-content">
-            <h4 class="center-align">Sport Type</h4>
-             <ul class="collection">
-              <li class="collection-item"><strong>Code: </strong><%= sport_type.code %></li>
-              <li class="collection-item"><strong>Name: </strong><%= sport_type.name %></li>
-              <li class="collection-item"><strong>Status: </strong><%= sport_type.record_status %></li>
-            </ul>
-          </div>
-          <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">CLOSE</a>
-          </div>
-        </div>
-        <td><%= sport_type.name %></td>
-        <td><%= sport_type.record_status %></td>
-        <td>
-          <%= link_to edit_sport_type_path(sport_type) do %>
-            <i class="material-icons">edit</i>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to sport_type, method: :delete, data: { confirm: 'Are you sure?' } do %>
-            <i class="material-icons">delete</i>
-          <% end %>  
-        </td>
-        </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<div class="fixed-action-btn">
-  <%= link_to new_sport_type_path, class: "btn-floating btn-large waves-effect waves-light blue" do %>
-    <i class="material-icons">add</i>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col s8">
+      <%= form_for_filterrific @filterrific do |f| %>
+      <div>
+        Search
+        <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+        <%= f.text_field(
+          :search_query,
+          class: 'filterrific-periodically-observed'
+        ) %>
+      </div>
+    </div>
+    <div class="col s4">
+      <%= link_to(
+        'Reset filters',
+        reset_filterrific_url,
+        class: 'btn-small white-text'
+      ) %>
+    </div>
+  </div>
+  
+  <%# add an automated spinner to your form when the list is refreshed %>
+  <%= render_filterrific_spinner %>
+<% end %>
 </div>
 
-<% content_for :custom_scripts do %>
-<script>
-  document.addEventListener('turbolinks:load', () => {
-    let elems = document.querySelectorAll('.modal');
-    let instances = M.Modal.init(elems);
-  });
-
-  document.addEventListener('turbolinks:before-cache', () => {
-    let elems = document.querySelectorAll('.modal');
-    let instances = M.Modal.init(elems);
-    instances.forEach(element => {
-      if(element) element.destroy();
-    });
-  });
-</script>
-<% end %>
+<%= render(
+  partial: 'list',
+  locals: { sport_types: @sport_Types }
+) %>
