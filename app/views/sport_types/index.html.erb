@@ -16,6 +16,7 @@
 
   <tbody>
     <% @sport_types.each do |sport_type| %>
+      <tr>
       <td>
           <%= link_to sport_type.code, 
                       "#modal#{sport_type.code}", 
@@ -47,6 +48,7 @@
             <i class="material-icons">delete</i>
           <% end %>  
         </td>
+        </tr>
     <% end %>
   </tbody>
 </table>
